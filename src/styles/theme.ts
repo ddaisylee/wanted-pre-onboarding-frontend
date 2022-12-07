@@ -1,23 +1,22 @@
-const calRem = (size: number): string => `${size / 16}rem`
-
 const fontSize = {
-  small: calRem(11),
-  middle: calRem(13),
-  large: calRem(15),
+  xsmall: '12px',
+  small: '15px',
+  middle: '20px',
+  large: '25px',
+  xlarge: '35px',
 }
 
 const fontWeight = {
   thin: 300,
   regular: 400,
-  bold: 500,
+  bold: 600,
 }
 
 const color = {
-  primary: '#36f',
+  primary: '#9844E8',
+  secondary: '#EBE4F9',
   border: '#e1e2e3',
   text: '#373737',
-  checked: '#438BFF',
-  unchecked: '#888',
   white: '#fff',
 }
 

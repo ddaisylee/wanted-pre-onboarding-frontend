@@ -8,9 +8,12 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html, body {
+  body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   input, textarea { 
@@ -20,9 +23,12 @@ export const GlobalStyle = createGlobalStyle`
     user-select: auto;
   }
   
-  input:focus {
+  input {
+  border: none;
+  &:focus {
     outline: none;
   }
+}
   
   button {
     border: none;
