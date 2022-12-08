@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { Button, Input } from '../../components'
 import { useValidationCheck } from '../../hooks/useValidationCheck'
@@ -6,8 +7,10 @@ import {
   emailValidationCheck,
   passwordValidationCheck,
 } from '../../utils/validationCheck'
+import { axiosInstance, setAccessToken, getAccessToken } from '../../utils'
 
 const SignIn = () => {
+  const navigate = useNavigate()
   const [email, isEmailValid, handleEmailChange] =
     useValidationCheck(emailValidationCheck)
 
@@ -15,10 +18,24 @@ const SignIn = () => {
     passwordValidationCheck,
   )
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(email, password)
+    try {
+      const body = { email, password }
+      const url = 'auth/signin'
+      const { data } = await axiosInstance.post(url, body)
+      setAccessToken(data.access_token)
+      alert('로그인에 성공했습니다.')
+      navigate('/todo')
+    } catch (error) {
+      alert('로그인에 실패했습니다.')
+    }
   }
+
+  useEffect(() => {
+    const token = getAccessToken()
+    if (token) navigate('/todo')
+  }, [navigate])
 
   return (
     <S.Container>
