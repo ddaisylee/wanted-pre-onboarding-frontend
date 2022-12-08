@@ -18,6 +18,7 @@ const color = {
   border: '#e1e2e3',
   text: '#373737',
   white: '#fff',
+  error: '#ff3f3f',
 }
 
 export type FontSizeTypes = typeof fontSize

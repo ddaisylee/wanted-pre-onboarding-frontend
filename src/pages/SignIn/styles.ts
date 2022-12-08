@@ -28,7 +28,7 @@ export const RightBox = styled.div`
 `
 export const Title = styled.h1`
   position: absolute;
-  top: 40px;
+  top: 30px;
   left: 5px;
   color: ${props => props.theme.color.primary};
   font-size: ${props => props.theme.fontSize.large};
@@ -44,7 +44,11 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+
+  button {
+    margin-top: 20px;
+  }
 `
 
 export const Link = styled.div`
