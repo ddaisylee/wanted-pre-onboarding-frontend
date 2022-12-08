@@ -1,13 +1,14 @@
+import { ReactNode } from 'react'
 import * as S from './styles'
 
 interface Props {
-  type?: 'Sign In' | 'Sign Up'
+  children: ReactNode
   disabled?: boolean
 }
 
-const Button = ({ type, disabled }: Props) => (
+const Button = ({ children, disabled }: Props) => (
   <S.Container>
-    <S.Button disabled={disabled}>{type}</S.Button>
+    <S.Button disabled={disabled}>{children}</S.Button>
   </S.Container>
 )
 

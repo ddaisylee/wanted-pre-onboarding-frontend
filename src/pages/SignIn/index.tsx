@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { Button, Input } from '../../components'
@@ -8,8 +8,11 @@ import {
   passwordValidationCheck,
 } from '../../utils/validationCheck'
 import { axiosInstance, setAccessToken, getAccessToken } from '../../utils'
+import { SIGNIN_URL, SIGNUP_URL } from '../../assets/constants'
 
 const SignIn = () => {
+  const [isSignInPage, setIsSignInPage] = useState(true)
+
   const navigate = useNavigate()
   const [email, isEmailValid, handleEmailChange] =
     useValidationCheck(emailValidationCheck)
@@ -22,26 +25,33 @@ const SignIn = () => {
     e.preventDefault()
     try {
       const body = { email, password }
-      const url = 'auth/signin'
+      const url = isSignInPage ? SIGNIN_URL : SIGNUP_URL
       const { data } = await axiosInstance.post(url, body)
       setAccessToken(data.access_token)
-      alert('로그인에 성공했습니다.')
-      navigate('/todo')
+
+      if (isSignInPage) {
+        alert('로그인에 성공했습니다.')
+        navigate('/todo')
+      } else {
+        alert('회원가입에 성공했습니다')
+        navigate('/todo')
+      }
     } catch (error) {
       alert('로그인에 실패했습니다.')
     }
   }
 
   useEffect(() => {
-    const token = getAccessToken()
-    if (token) navigate('/todo')
+    const accessToken = getAccessToken()
+    if (accessToken) navigate('/todo')
+    if (!accessToken) navigate('/')
   }, [navigate])
 
   return (
     <S.Container>
       <S.LeftBox src="/Img/pre-onboarding.png" />
       <S.RightBox>
-        <S.Title>Sign In</S.Title>
+        <S.Title>{isSignInPage ? 'Sign In' : 'Sign Up'}</S.Title>
         <S.Form onSubmit={e => handleSubmit(e)}>
           <Input
             type="Email"
@@ -57,8 +67,12 @@ const SignIn = () => {
             message="비밀번호는 8자 이상입니다."
             onChange={e => handlePasswordChange(e)}
           />
-          <Button type="Sign In" disabled={!isEmailValid || !isPasswordValid} />
-          <S.Link>Sign Up</S.Link>
+          <Button disabled={!isEmailValid || !isPasswordValid}>
+            {isSignInPage ? 'Sign In' : 'Sign Up'}
+          </Button>
+          <S.Link onClick={() => setIsSignInPage(!isSignInPage)}>
+            {isSignInPage ? 'Sign Up' : 'Sign In'}
+          </S.Link>
         </S.Form>
       </S.RightBox>
     </S.Container>
