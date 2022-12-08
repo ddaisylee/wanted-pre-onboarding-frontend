@@ -10,7 +10,7 @@ import {
 import { axiosInstance, setAccessToken, getAccessToken } from '../../utils'
 import { SIGNIN_URL, SIGNUP_URL } from '../../assets/constants'
 
-const SignIn = () => {
+const Auth = () => {
   const [isSignInPage, setIsSignInPage] = useState(true)
 
   const navigate = useNavigate()
@@ -79,4 +79,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Auth
