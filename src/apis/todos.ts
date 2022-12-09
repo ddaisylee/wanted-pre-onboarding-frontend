@@ -16,3 +16,15 @@ export const getTodos = async (): Promise<ITodo[] | undefined> => {
     alert('할 일을 추가하지 못했습니다.')
   }
 }
+
+export const removeTodo = async (id: number | undefined): Promise<void> => {
+  try {
+    await axiosInstance.delete(`todos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+  } catch (error) {
+    alert('투두를 삭제하지 못했습니다.')
+  }
+}

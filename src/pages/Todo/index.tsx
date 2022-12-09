@@ -21,9 +21,11 @@ const Todo = () => {
       <S.TodoList>
         {todos?.map(todo => (
           <TodoItem
+            id={todo.id}
             key={todo.id}
             todo={todo.todo}
             isCompleted={todo.isCompleted}
+            setTodos={setTodos}
           />
         ))}
       </S.TodoList>
