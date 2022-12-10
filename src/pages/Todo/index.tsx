@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { TodoItem } from '../../components'
 import { addTodo, getTodos } from '../../apis/todos'
 import { ITodo } from '../../types/todo'
+import { getAccessToken } from '../../utils'
 
 const Todo = () => {
   const [todos, setTodos] = useState<ITodo[] | undefined>([])
   const [newTodo, setNewTodo] = useState<string>('')
+  const navigate = useNavigate()
 
   useEffect(() => {
-    getTodos().then(data => setTodos(data))
+    if (!getAccessToken()) navigate('/')
+    getTodos().then(data => {
+      if (data) setTodos(data)
+    })
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(e.target.value)
-    console.log(newTodo)
   }
 
   const handleClick = () => {
