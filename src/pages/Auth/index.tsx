@@ -7,12 +7,12 @@ import {
   emailValidationCheck,
   passwordValidationCheck,
 } from '../../utils/validationCheck'
-import { axiosInstance, setAccessToken, getAccessToken } from '../../utils'
-import { SIGNIN_URL, SIGNUP_URL } from '../../assets/constants'
+import { getAccessToken } from '../../utils'
+
+import { auth } from '../../apis/auth'
 
 const Auth = () => {
   const [isSignInPage, setIsSignInPage] = useState(true)
-
   const navigate = useNavigate()
   const [email, isEmailValid, handleEmailChange] =
     useValidationCheck(emailValidationCheck)
@@ -23,22 +23,12 @@ const Auth = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    try {
-      const body = { email, password }
-      const url = isSignInPage ? SIGNIN_URL : SIGNUP_URL
-      const { data } = await axiosInstance.post(url, body)
-      setAccessToken(data.access_token)
-
-      if (isSignInPage) {
-        alert('로그인에 성공했습니다.')
-        navigate('/todo')
-      } else {
-        alert('회원가입에 성공했습니다')
-        navigate('/todo')
-      }
-    } catch (error) {
-      alert('로그인에 실패했습니다.')
-    }
+    auth({
+      email,
+      password,
+      isSignInPage,
+      onSuccess: () => window.location.replace('/todo'),
+    })
   }
 
   useEffect(() => {
