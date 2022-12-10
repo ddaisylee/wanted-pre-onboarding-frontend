@@ -5,6 +5,7 @@ export const TodoItemContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 40px;
+  margin-bottom: 10px;
 `
 
 export const Content = styled.li`

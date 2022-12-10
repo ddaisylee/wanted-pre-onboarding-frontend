@@ -41,3 +41,25 @@ export const addTodo = async (newTodo: string): Promise<void> => {
     alert('할 일을 추가하지 못했습니다.')
   }
 }
+
+export const updateTodo = async ({
+  id,
+  updatedTodo,
+  isCompleted,
+}: {
+  id: number
+  updatedTodo: string
+  isCompleted: boolean
+}): Promise<void> => {
+  const body = { todo: updatedTodo, isCompleted }
+  try {
+    await axiosInstance.put(`/todos/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    alert('할 일을 수정하지 못했습니다.')
+  }
+}

@@ -1,10 +1,10 @@
 import * as S from './styles'
 
 interface Props {
-  type: 'Email' | 'Password'
-  value: string
-  isValid: boolean
-  message: string
+  type?: 'Email' | 'Password'
+  value?: string
+  isValid?: boolean
+  message?: string
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => void | React.Dispatch<React.SetStateAction<string>>
