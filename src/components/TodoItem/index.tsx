@@ -10,7 +10,7 @@ interface Props extends ITodo {
 
 const TodoItem = ({ id, todo, isCompleted, setTodos }: Props) => {
   const handleDelete = () => {
-    if (window.confirm('투두를 삭제하시겠습니까?')) {
+    if (window.confirm('할일을 삭제하시겠습니까?')) {
       removeTodo(id)
         .then(() => getTodos())
         .then(data => {

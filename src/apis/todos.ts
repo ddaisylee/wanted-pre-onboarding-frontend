@@ -25,6 +25,6 @@ export const removeTodo = async (id: number | undefined): Promise<void> => {
       },
     })
   } catch (error) {
-    alert('투두를 삭제하지 못했습니다.')
+    alert('할 일을 삭제하지 못했습니다.')
   }
 }
