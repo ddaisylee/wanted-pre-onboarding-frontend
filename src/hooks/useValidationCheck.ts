@@ -6,6 +6,7 @@ export const useValidationCheck: (
   string,
   boolean,
   (event: ChangeEvent<HTMLInputElement>) => void,
+  React.Dispatch<React.SetStateAction<string>>,
 ] = validationCheckCallback => {
   const [value, setValue] = useState('')
   const [isValid, setIsValid] = useState(false)
@@ -28,5 +29,5 @@ export const useValidationCheck: (
     [validationCheckCallback],
   )
 
-  return [value, isValid, handleChange]
+  return [value, isValid, handleChange, setValue]
 }

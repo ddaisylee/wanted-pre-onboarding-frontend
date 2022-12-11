@@ -5,3 +5,7 @@ export const emailValidationCheck = (email: string) => {
 export const passwordValidationCheck = (password: string) => {
   return password.length >= 8
 }
+
+export const todoInputVlaueValidationCheck = (todoInputValue: string) => {
+  return todoInputValue.length > 0
+}

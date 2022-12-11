@@ -44,14 +44,14 @@ export const addTodo = async (newTodo: string): Promise<void> => {
 
 export const updateTodo = async ({
   id,
-  updatedTodo,
+  value,
   isCompleted,
 }: {
   id: number
-  updatedTodo: string
+  value: string
   isCompleted: boolean
 }): Promise<void> => {
-  const body = { todo: updatedTodo, isCompleted }
+  const body = { todo: value, isCompleted }
   try {
     await axiosInstance.put(`/todos/${id}`, body, {
       headers: {
