@@ -22,7 +22,6 @@ export const auth = async ({
       .then(({ data }) => setAccessToken(data.access_token))
     if (onSuccess) onSuccess()
   } catch (error) {
-    // alert('로그인에 실패했습니다.')
-    console.log(error)
+    alert('로그인에 실패했습니다.')
   }
 }
