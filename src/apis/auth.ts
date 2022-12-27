@@ -17,9 +17,10 @@ export const auth = async ({
   const body = { email, password }
   const url = isSignInPage ? SIGNIN_URL : SIGNUP_URL
   try {
-    await axiosInstance
-      .post(url, body)
-      .then(({ data }) => setAccessToken(data.access_token))
+    const {
+      data: { access_token: accessToken },
+    } = await axiosInstance.post(url, body)
+    if (accessToken) setAccessToken(accessToken)
     if (onSuccess) onSuccess()
   } catch (error) {
     alert('로그인에 실패했습니다.')
