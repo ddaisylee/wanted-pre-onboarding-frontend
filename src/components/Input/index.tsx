@@ -13,7 +13,7 @@ interface Props {
 const Input = ({ type, value, isValid, message, onChange }: Props) => (
   <S.Container>
     <S.Text>{type}</S.Text>
-    <S.Input onChange={e => onChange(e)} value={value} />
+    <S.Input onChange={onChange} value={value} />
     {isValid || (value && <S.Message>{message}</S.Message>)}
   </S.Container>
 )

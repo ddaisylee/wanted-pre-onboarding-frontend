@@ -8,15 +8,13 @@ import {
   passwordValidationCheck,
 } from '../../utils/validationCheck'
 import { getAccessToken } from '../../utils'
-
 import { auth } from '../../apis/auth'
 
 const Auth = () => {
-  const [isSignInPage, setIsSignInPage] = useState(true)
   const navigate = useNavigate()
+  const [isSignInPage, setIsSignInPage] = useState(true)
   const [email, isEmailValid, handleEmailChange] =
     useValidationCheck(emailValidationCheck)
-
   const [password, isPasswordValid, handlePasswordChange] = useValidationCheck(
     passwordValidationCheck,
   )
@@ -42,20 +40,20 @@ const Auth = () => {
       <S.LeftBox src="/Img/pre-onboarding.png" />
       <S.RightBox>
         <S.Title>{isSignInPage ? 'Sign In' : 'Sign Up'}</S.Title>
-        <S.Form onSubmit={e => handleSubmit(e)}>
+        <S.Form onSubmit={handleSubmit}>
           <Input
             type="Email"
             isValid={isEmailValid}
             value={email}
             message="올바른 이메일 형식을 입력해주세요."
-            onChange={e => handleEmailChange(e)}
+            onChange={handleEmailChange}
           />
           <Input
             type="Password"
             isValid={isPasswordValid}
             value={password}
             message="비밀번호는 8자 이상입니다."
-            onChange={e => handlePasswordChange(e)}
+            onChange={handlePasswordChange}
           />
           <Button disabled={!isEmailValid || !isPasswordValid}>
             {isSignInPage ? 'Sign In' : 'Sign Up'}

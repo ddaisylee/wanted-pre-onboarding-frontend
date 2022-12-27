@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { TodoItem } from '../../components'
 import { addTodo, getTodos } from '../../apis/todos'
 import { ITodo } from '../../types/todo'
-import { getAccessToken } from '../../utils'
 
 const Todo = () => {
   const [todos, setTodos] = useState<ITodo[] | undefined>([])
   const [newTodo, setNewTodo] = useState<string>('')
-  const navigate = useNavigate()
 
   useEffect(() => {
-    if (!getAccessToken()) navigate('/')
-    getTodos().then(data => {
-      if (data) setTodos(data)
-    })
+    const renderTodos = async () => {
+      const getResponse = await getTodos()
+      setTodos(() => getResponse)
+    }
+    renderTodos()
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(e.target.value)
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!newTodo.length) {
-      alert('할 일을 추가해주세요.')
-    } else if (window.confirm('할 일을 추가하시겠습니까?')) {
-      addTodo(newTodo)
-        .then(() => getTodos())
-        .then(data => setTodos(data))
+      window.alert('할 일을 입력해주세요.')
     }
-    setNewTodo('')
+
+    if (newTodo.length) {
+      await addTodo(newTodo)
+      const getResponse = await getTodos()
+      setTodos(() => getResponse)
+    }
   }
 
   return (
@@ -40,9 +39,9 @@ const Todo = () => {
         <S.TodoInput
           placeholder="할 일을 입력하세요."
           value={newTodo}
-          onChange={e => handleChange(e)}
+          onChange={handleChange}
         />
-        <S.TodoButton onClick={() => handleClick()}>Add</S.TodoButton>
+        <S.TodoButton onClick={handleClick}>Add</S.TodoButton>
       </S.TodoInputContainer>
       <S.TodoList>
         {todos?.map(todo => (
