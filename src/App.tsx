@@ -1,11 +1,10 @@
-import { Route, Routes } from 'react-router-dom'
-import { Auth, Todo } from './pages'
+import { BrowserRouter as Router } from 'react-router-dom'
+import AppRoutes from './routes/AppRoutes'
 
 const App = () => (
-  <Routes>
-    <Route path="/" element={<Auth />} />
-    <Route path="/todo" element={<Todo />} />
-  </Routes>
+  <Router>
+    <AppRoutes />
+  </Router>
 )
 
 export default App
