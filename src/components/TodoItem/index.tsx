@@ -9,7 +9,12 @@ import {
 import React, { useState } from 'react'
 import * as S from './styles'
 import { ITodo } from '../../types/todo'
-import { getTodos, removeTodo, updateTodo } from '../../apis/todos'
+import {
+  getTodos,
+  removeTodo,
+  updateTodo,
+  completeTodo,
+} from '../../apis/todos'
 import Input from '../Input'
 import { useValidationCheck } from '../../hooks/useValidationCheck'
 import { todoInputVlaueValidationCheck } from '../../utils'
@@ -42,10 +47,20 @@ const TodoItem = ({ id, todo, isCompleted, setTodos }: Props) => {
     setTodos(() => getResponse)
   }
 
+  const handleComplete = async () => {
+    await completeTodo({ id, todo, isCompleted })
+    const getResponse = await getTodos()
+    setTodos(() => getResponse)
+  }
+
   return (
     <S.TodoItemContainer>
       <S.IconContainer>
-        {isCompleted ? <FaRegCheckCircle /> : <FaRegCircle />}
+        {isCompleted ? (
+          <FaRegCheckCircle onClick={handleComplete} />
+        ) : (
+          <FaRegCircle onClick={handleComplete} />
+        )}
       </S.IconContainer>
       {isEdit ? (
         <Input onChange={handleValueChange} value={value} />

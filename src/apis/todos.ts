@@ -2,13 +2,11 @@
 import { axiosInstance, getAccessToken } from '../utils'
 import { ITodo } from '../types/todo'
 
-const accessToken = getAccessToken()
-
 export const getTodos = async (): Promise<ITodo[] | undefined> => {
   try {
     const { data } = await axiosInstance.get('/todos', {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     })
     return data
@@ -21,7 +19,7 @@ export const removeTodo = async (id: number | undefined): Promise<void> => {
   try {
     await axiosInstance.delete(`todos/${id}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     })
   } catch (error) {
@@ -34,7 +32,7 @@ export const addTodo = async (newTodo: string): Promise<void> => {
   try {
     await axiosInstance.post('/todos', body, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     })
   } catch (error) {
@@ -55,11 +53,33 @@ export const updateTodo = async ({
   try {
     await axiosInstance.put(`/todos/${id}`, body, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
         'Content-Type': 'application/json',
       },
     })
   } catch (error) {
     alert('할 일을 수정하지 못했습니다.')
+  }
+}
+
+export const completeTodo = async ({
+  id,
+  todo,
+  isCompleted,
+}: {
+  id: number
+  todo: string
+  isCompleted: boolean
+}): Promise<void> => {
+  const body = { todo, isCompleted: !isCompleted }
+  try {
+    await axiosInstance.put(`/todos/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error) {
+    alert('할 일을 완료하지 못했습니다.')
   }
 }
