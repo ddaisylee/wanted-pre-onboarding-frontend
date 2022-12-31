@@ -12,15 +12,15 @@ export const TodoContainer = styled.div`
   overflow: hidden;
   border-radius: 24px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background-color: rgba(${props => props.theme.color.secondary}, 0.7);
+  background-color: rgba(${({ theme }) => theme.color.secondary}, 0.7);
 `
 
 export const TodoTitle = styled.h1`
   margin-top: 30px;
   text-align: center;
-  color: ${props => props.theme.color.primary};
-  font-size: ${props => props.theme.fontSize.xlarge};
-  font-weight: ${props => props.theme.fontWeight.bold};
+  color: ${({ theme }) => theme.color.primary};
+  font-size: ${({ theme }) => theme.fontSize.xlarge};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `
 
 export const TodoInputContainer = styled.div`

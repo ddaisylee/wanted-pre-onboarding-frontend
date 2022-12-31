@@ -12,7 +12,7 @@ export const Container = styled.div`
 `
 
 export const LeftBox = styled.img`
-  background-color: ${props => props.theme.color.secondary};
+  background-color: ${({ theme }) => theme.color.secondary};
   width: 50%;
   height: 100%;
 `
@@ -30,9 +30,9 @@ export const Title = styled.h1`
   position: absolute;
   top: 30px;
   left: 5px;
-  color: ${props => props.theme.color.primary};
-  font-size: ${props => props.theme.fontSize.large};
-  font-weight: ${props => props.theme.fontWeight.bold};
+  color: ${({ theme }) => theme.color.primary};
+  font-size: ${({ theme }) => theme.fontSize.large};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `
 
 export const Form = styled.form`
@@ -52,8 +52,8 @@ export const Form = styled.form`
 `
 
 export const Link = styled.div`
-  color: ${props => props.theme.color.text};
-  font-size: ${props => props.theme.fontSize.xsmall};
+  color: ${({ theme }) => theme.color.text};
+  font-size: ${({ theme }) => theme.fontSize.xsmall};
   text-decoration: underline;
   cursor: pointer;
 `

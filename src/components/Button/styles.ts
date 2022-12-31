@@ -7,11 +7,11 @@ export const Container = styled.div`
 export const Button = styled.button`
   width: inherit;
   height: 40px;
-  background-color: ${props => props.theme.color.primary};
+  background-color: ${({ theme }) => theme.color.primary};
   border-width: 10px;
   border-radius: 4px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  color: ${props => props.theme.color.white};
+  color: ${({ theme }) => theme.color.white};
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;

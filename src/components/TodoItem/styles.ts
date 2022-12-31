@@ -10,8 +10,8 @@ export const TodoItemContainer = styled.div`
 
 export const Content = styled.li`
   flex-grow: 1;
-  font-size: ${props => props.theme.fontSize.small};
-  color: ${props => props.theme.color.text};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  color: ${({ theme }) => theme.color.text};
 `
 
 export const IconContainer = styled.div`

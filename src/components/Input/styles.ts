@@ -8,14 +8,14 @@ export const Container = styled.div`
 
 export const Text = styled.span`
   margin: 6px 0;
-  color: ${props => props.theme.color.text};
-  font-size: ${props => props.theme.fontSize.small};
-  font-weight: ${props => props.theme.fontWeight.bold};
+  color: ${({ theme }) => theme.color.text};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
 `
 
 export const Message = styled(Text)`
-  color: ${props => props.theme.color.error};
-  font-size: ${props => props.theme.fontSize.xsmall};
+  color: ${({ theme }) => theme.color.error};
+  font-size: ${({ theme }) => theme.fontSize.xsmall};
   height: 1px;
 `
 
@@ -26,8 +26,8 @@ export const Input = styled.input.attrs(props => ({
   height: 40px;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-  color: ${props => props.theme.color.primary};
+  color: ${({ theme }) => theme.color.primary};
   :focus {
-    box-shadow: 0 0 20px ${props => props.theme.color.secondary};
+    box-shadow: 0 0 20px ${({ theme }) => theme.color.secondary};
   }
 `
