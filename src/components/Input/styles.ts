@@ -16,6 +16,7 @@ export const Text = styled.span`
 export const Message = styled(Text)`
   color: ${props => props.theme.color.error};
   font-size: ${props => props.theme.fontSize.xsmall};
+  height: 1px;
 `
 
 export const Input = styled.input.attrs(props => ({

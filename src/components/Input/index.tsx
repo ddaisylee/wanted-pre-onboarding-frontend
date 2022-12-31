@@ -14,7 +14,7 @@ const Input = ({ type, value, isValid, message, onChange }: Props) => (
   <S.Container>
     <S.Text>{type}</S.Text>
     <S.Input onChange={onChange} value={value} />
-    {isValid || (value && <S.Message>{message}</S.Message>)}
+    <S.Message>{isValid || (value && message)}</S.Message>
   </S.Container>
 )
 
